@@ -1,0 +1,370 @@
+create table clientes(
+idClientes varchar(10) primary key,
+nombre varchar (20), 
+apellido varchar (20),
+dni varchar (11),
+ruc varchar (11),
+edad int,
+sexo char (1),
+telefono char (8),
+direccion varchar (50)
+) 
+go
+
+create table proveedor(
+idProveedor varchar (10) primary key,
+razonSocial varchar (30),
+ruc varchar(11)
+telefono char (8),
+direccion varchar (50)
+)
+go
+
+create table categoria(
+idCategoria int identity primary key,
+descripcion varchar (15)
+)
+go
+
+create table productos(
+idProducto varchar (10) primary key,
+serie varchar (30),
+nombre varchar (30),
+fechaIngre date,
+fechaVenc date,
+precioCompra decimal(9,2),
+precioVenta decimal (9,2),
+cantidad int,
+idCategoria int references categoria(idCategoria)
+)
+go
+
+create table empleados(
+idEmpleado varchar (5) primary key,
+nombre varchar (20), 
+apellido varchar (20),
+dni varchar (11),
+telefono varchar (8),
+direccion varchar (50)
+)
+go
+
+create table usuarios(
+idUsuario int identity primary key,
+idEmpleado varchar (5) references empleados(idEmpleado),
+usuario varchar (20),
+pass varchar (20),
+acceso varchar (20),
+estado char (2)
+)
+go
+
+create table compras(
+idCompra int identity primary key,
+fecha date,
+hora varchar (10),
+numDocumento varchar (7),
+tipoDocumento varchar (7),
+subtotal decimal (8,2),
+igv decimal (8,2),
+total decimal (8,2),
+estado varchar (20),
+idUsuario int references usuarios(idUsuario),
+idProveedor varchar (10) references proveedor(idProveedor)
+)
+go
+
+create table detalle_compras(
+idDetalleCompra int identity primary key,
+idCompra int references compras(idCompra),
+idProducto varchar (10) references productos(idProducto),
+cantidad int,
+precio decimal (8,2)
+total decimal (8,2)
+)
+go
+
+create table ventas(
+idVenta int identity primary key,
+fecha date, 
+hora varchar (10),
+serie varchar (7),
+numDocumento varchar (7),
+tipoDocumento varchar (7),
+igv decimal (8,2),
+total decimal (8,2),
+estado varchar (20),
+idUsuario int references usuarios(idUsuario),
+idClientes varchar (10) references clientes(idClientes) 
+)
+go
+
+create table detalle_ventas(
+idDetalleVentas int identity primary key,
+idVenta int references ventas(idVenta),
+idProducto varchar (10) references productos(idProducto),
+cantidad int,
+precio decimal (8,2)
+total decimal (8,2)
+)
+go
+
+				.:PROCEDIMIENTOS:.
+
+create proc sp_listar_clientes
+as
+select * from clientes
+go
+
+create proc sp_guardar_clientes
+@codigo varchar (10),
+@nombre varchar (30),
+@apellido varchar (30),
+@dni int,
+@ruc varchar (11),
+@edad int,
+@sexo char (1),
+@telef char(9),
+@direc varchar (50)
+as
+insert into clientes
+values (@codigo,@nombre,@apellido,@dni,@ruc,@edad,@sexo,@telef,@direc)
+go
+
+create proc sp_editar_clientes
+@codigo varchar (10),
+@nombre varchar (30),
+@apellido varchar (30),
+@dni int,
+@ruc varchar (11),
+@edad int,
+@sexo char (1),
+@telef char(9),
+@direc varchar (50)
+as
+update clientes set nombre=@nombre, apellidos=@apellido, dni=@dni, ruc=@ruc, edad=@edad, sexo=@sexo, telefono=@telef, direccion=@direc
+WHERE idClientes=@codigo
+go
+
+create proc sp_eliminar_clientes
+@codigo varchar (10)
+as
+delete from clientes WHERE idClientes=@codigo;
+
+create proc sp_buscar_clientes
+@dni varchar (11)
+as
+select * from clientes WHERE dni like @dni+'%'
+go
+
+create proc sp_listar_empleados
+as
+select * from empleados
+go
+
+create proc sp_guardar_empleados
+@idempleado varchar (5),
+@nombre varchar (30),
+@apellido varchar (30),
+@dni varchar (11),
+@telef varchar (8),
+@direc varchar (50)
+as
+insert into empleados values(@idempleado,@nombre,@apellido,@dni,@telef,@direc)
+go
+
+create proc sp_eliminar_empleados
+@idempleado varchar (5)
+as
+delete from empleados where idEmpleados=@idempleado
+go
+
+create proc sp_editar_empleados
+@idempleado varchar (5),
+@nombre varchar (30),
+@apellido varchar (30),
+@dni varchar (11),
+@telef varchar (8),
+@direc varchar (50)
+as
+update empleados set nombre=@nombre,apellidos=@apellido,dni=@dni,telefono=@telef,direccion=@direc
+where idEmpleados=@idempleado
+go
+
+create proc sp_buscar_empleados
+@dni varchar (11)
+as 
+select * from empleados where dni like @dni+'%'
+go
+
+create proc sp_listar_proveedor
+AS
+SELECT * FROM proveedor
+go
+
+create proc sp_guardar_proveedor
+@codigo varchar(10), @razon varchar(30), @ruc varchar(11),
+@telef varchar(11), @direc varchar(50) 
+AS 
+INSERT INTO proveedor VALUES(@codigo, @razon, @ruc, @telef, @direc)
+go
+
+create proc sp_eliminar_proveedor
+@codigo varchar(10) 
+AS 
+DELETE FROM proveedor WHERE idProveedor=@codigo
+go
+
+create proc sp_editar_proveedor 
+@codigo varchar(10), @razon varchar(30), @ruc varchar(11),
+@telef varchar(11), @direc varchar(50) 
+AS 
+UPDATE proveedor SET razonSocial=@razon, ruc=@ruc, telefono=@telef, direccion=@direc
+WHERE idProveedor=@codigo
+go
+
+create proc sp_buscar_proveedor
+@nombre varchar(30) 
+AS 
+SELECT * FROM proveedor 
+WHERE razonSocial LIKE @nombre+'%'
+go
+
+create proc sp_sesion
+@usuario varchar (20),
+@password varchar (20)
+as
+select usuarios.idUsuarios, usuarios.idEmpleados as idemple,
+empleados.nombre as nombre, empleados.apellidos apellidos,
+usuarios.usuario,usuarios.pass,usuarios.acceso,usuarios.estado
+from usuarios inner join empleados on 
+usuarios.idEmpleados = empleados.idEmpleados
+where usuario=@usuario and pass=@password and estado='SI'
+go
+
+create proc sp_listar_usuario
+@usuario varchar (20)
+as
+select usuarios.idUsuarios,usuarios.idEmpleados,empleados.nombre,
+empleados.apellidos,usuarios.usuario,usuarios.acceso,usuarios.pass,
+usuarios.estado from usuarios inner join empleados
+on usuarios.idEmpleados=empleados.idEmpleados 
+where usuario like @usuario+'%'
+go
+
+create proc sp_eliminar_usuarios
+@idusuario int
+as
+delete from usuarios where idUsuarios=@idusuario
+go
+
+create proc sp_editar_usuarios
+@idempleado varchar (5),
+@usuario varchar (20),
+@password varchar (20),
+@acceso varchar (20),
+@estado char (2)
+as
+update usuarios set usuario=@usuario,pass=@password,acceso=@acceso,estado=@estado
+where idEmpleados=@idempleado
+go
+
+create proc sp_listar_categoria
+as
+select * from categoria;
+go
+
+create proc registrarCategoria 
+@descripcion varchar(15) 
+AS
+INSERT INTO categoria VALUES(@descripcion)
+go
+
+create proc sp_listar_producto
+@nombre varchar (30)
+as
+select productos.idProducto, productos.serie, productos.nombre, 
+productos.fechaIngreso, productos.fechaVencimiento, productos.precioCompra,
+productos.precioVenta, productos.cantidad, productos.idCategoria, categoria.descripcion 
+as categ from categoria INNER JOIN productos on categoria.idCategoria=productos.idCategoria
+where nombre like @nombre+'%' order by idCategoria
+go
+
+create proc sp_guardar_producto
+@codigo varchar (10),
+@serie varchar (10),
+@nombre varchar (30),
+@fechaIngre varchar (15),
+@fechaCadu varchar (15),
+@precioCompra decimal (9,2),
+@precioVenta decimal (9,2),
+@categoria int
+as
+insert into productos
+VALUES(@codigo,@serie,@nombre,@fechaIngre,@fechaCadu,@precioCompra,@precioVenta,0,@categoria)
+go
+
+create proc sp_eliminar_producto 
+@codigo varchar (10)
+as
+delete from productos where idCategoria=@codigo
+go
+
+create proc sp_editar_producto 
+@codigo varchar (10),
+@serie varchar (10),
+@nombre varchar (30),
+@fechaIngre varchar (15),
+@fechaCadu varchar (15),
+@precioCompra decimal (9,2),
+@precioVenta decimal (9,2),
+@categoria int AS UPDATE productos SET 
+serie=@serie, nombre=@nombre, fechaIngreso=@fechaIngre, fechaVencimiento=@fechaCadu, precioCompra=@precioCompra, precioVenta=@precioVenta, idCategoria=@categoria
+WHERE idProducto=@codigo
+go
+
+CREATE PROC listar_compras
+AS
+SELECT compras.idCompra, proveedor.razonSocial, compras.fecha, empleados.nombre +' '+ empleados.apellidos, 
+compras.numDocumento, compras.tipoDocumento, compras.estado, compras.subtotal, 
+compras.igv, compras.total FROM compras INNER JOIN proveedor 
+ON compras.idProveedor = proveedor.idProveedor INNER JOIN usuarios 
+ON compras.idUsuarios = usuarios.idUsuarios INNER JOIN empleados 
+ON usuarios.idEmpleados = empleados.idEmpleados
+GO
+
+CREATE PROC sp_guardar_compra
+@fecha varchar (10),
+@hora varchar (10),
+@numDocumento varchar (7),
+@tipoDocumento varchar (7),
+@subtotal decimal (8,2),
+@igv decimal (8,2),
+@total decimal (8,2),
+@estado varchar (20),
+@idUser int,
+@idProveedor varchar (10)
+AS
+INSERT INTO compras
+VALUES (@fecha,@hora,@numDocumento,@tipoDocumento,@subtotal,@igv,@total,@estado,@idUser,@idProveedor)
+GO
+
+CREATE PROC sp_listar_detalle_venta
+@idventa int
+AS
+SELECT detalle_ventas.idVentas,productos.idProducto,productos.nombre,
+detalle_ventas.cantidad,productos.precioVenta,detalle_ventas.total
+FROM detalle_ventas inner join productos
+on detalle_ventas.idProducto = productos.idProducto
+WHERE idVentas=@idventa
+GO
+
+CREATE PROC sp_guardar_detalle_venta
+@idventa int,
+@idproducto varchar (10),
+@cantidad int,
+@precio decimal(8,2),
+@total decimal(8,2)
+AS
+INSERT INTO detalle_ventas VALUES (@idventa,@idproducto,@cantidad,@precio,@total)
+GO
