@@ -40,4 +40,13 @@ Para obtener una copia del proyecto en tu máquina local, ejecuta el siguiente c
 
 ```bash
 git clone https://github.com/MiguelAntonioRS/Gestion-Proyect-of-Buys-and-Sales.git
+
 cd Gestion-Proyect-of-Buys-and-Sales
+
+cd src
+
+cd com
+
+cd presentation
+
+javac FrmLogIn
