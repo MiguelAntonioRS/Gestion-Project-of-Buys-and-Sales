@@ -43,10 +43,6 @@ git clone https://github.com/MiguelAntonioRS/Gestion-Proyect-of-Buys-and-Sales.g
 
 cd Gestion-Proyect-of-Buys-and-Sales
 
-cd src
-
-cd com
-
-cd presentation
+cd src/com/presentation
 
 javac FrmLogIn
