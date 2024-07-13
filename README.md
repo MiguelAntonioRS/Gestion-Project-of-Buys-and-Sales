@@ -10,6 +10,7 @@ En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es pa
 
 - JDK 8 o superior
 - IDE como NetBeans, Eclipse, IntelliJ IDEA, etc.
+- Descargar un .jar para conectar java con SQL como por ejemplo [.jar](https://learn.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15)
 - Tener un gestor de bases de datos como SQL Server.
 - Libreria jCalendar aqui dejo el link [jCalendar](https://toedter.com/jcalendar)
   
