@@ -2,7 +2,7 @@
  
 Este proyecto es un sistema de gestión desarrollado en Java mediante una interfaz gráfica de usuario (GUI) construida con Swing y usando SQL para almacenar los datos.
  
-# Importante !!! 
+# Importante !!!  
    
 En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es para crear las tablas la otra para los procedimientos almacenados.
 
