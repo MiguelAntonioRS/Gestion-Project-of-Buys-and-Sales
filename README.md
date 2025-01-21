@@ -23,7 +23,7 @@ El proyecto está organizado en varias capas para separar la lógica de presenta
 - **capaLogica**: Contiene las clases que gestionan la lógica del negocio.
 
 ## Componentes del Sistema
-
+ 
 ### 1. frmLogin
 
 Este formulario permite al usuario ingresar al sistema mediante autenticación con usuario y contraseña.
