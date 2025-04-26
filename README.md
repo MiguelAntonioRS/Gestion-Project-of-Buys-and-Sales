@@ -6,7 +6,7 @@ Este proyecto es un sistema de gestión desarrollado en Java mediante una interf
    
 En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es para crear las tablas la otra para los procedimientos almacenados.
 
-## Requisitos 
+## Requisitos
 
 - JDK 8 o superior.
 - IDE como NetBeans, Eclipse, IntelliJ IDEA, etc.
