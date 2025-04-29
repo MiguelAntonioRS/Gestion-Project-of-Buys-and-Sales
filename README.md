@@ -16,7 +16,7 @@ En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es pa
   
 ## Estructura del Proyecto
 
-El proyecto está organizado en varias capas para separar la lógica de presentación, datos y negocio: 
+El proyecto está organizado en varias capas para separar la lógica de presentación, datos y negocio:
 
 - **capaPresentacion**: Contiene las clases relacionadas con la interfaz de usuario.
 - **capaData**: Contiene las clases que modelan los datos de usuarios y proveedores.
