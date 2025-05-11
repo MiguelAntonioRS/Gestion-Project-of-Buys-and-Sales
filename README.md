@@ -1,5 +1,5 @@
 # Sistema de Gestión de Compra y Venta.
-
+ 
 Este proyecto es un sistema de gestión desarrollado en Java mediante una interfaz gráfica de usuario (GUI) construida con Swing y usando SQL para almacenar los datos.
 
 # Importante !!!
