@@ -14,7 +14,7 @@ En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es pa
 - Tener un gestor de bases de datos como SQL Server.
 - Libreria jCalendar aqui dejo el link [jCalendar](https://toedter.com/jcalendar)
   
-## Estructura del Proyecto
+## Estructura del Proyecto 
 
 El proyecto está organizado en varias capas para separar la lógica de presentación, datos y negocio:
 
