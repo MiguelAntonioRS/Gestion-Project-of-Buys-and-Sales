@@ -13,7 +13,7 @@ En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es pa
 - Descargar un .jar para conectar java con SQL como por ejemplo [.jar](https://learn.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15)
 - Tener un gestor de bases de datos como SQL Server.
 - Libreria jCalendar aqui dejo el link [jCalendar](https://toedter.com/jcalendar)
-  
+
 ## Estructura del Proyecto 
 
 El proyecto está organizado en varias capas para separar la lógica de presentación, datos y negocio:
