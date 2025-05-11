@@ -4,7 +4,7 @@ Este proyecto es un sistema de gestión desarrollado en Java mediante una interf
 
 # Importante !!!
 
-En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es para crear las tablas la otra para los procedimientos almacenados. 
+En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es para crear las tablas la otra para los procedimientos almacenados.
 
 ## Requisitos
 
