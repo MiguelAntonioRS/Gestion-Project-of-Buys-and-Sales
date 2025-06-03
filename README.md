@@ -1,49 +1,87 @@
-# Sistema de Gestión de Compra y Venta.
- 
-Este proyecto es un sistema de gestión desarrollado en Java mediante una interfaz gráfica de usuario (GUI) construida con Swing y usando SQL para almacenar los datos.
+# 🛒 Purchase and Sales Management System
 
-# Importante !!!
+This is a **Java-based desktop application** with a graphical user interface (GUI) built using **Swing**, and uses **SQL Server** as the backend database. The system allows users to manage purchases, sales, and other related operations.
 
-En la carpeta DB hay 2 archivos .txt con las sentencias SQL a ejecutar una es para crear las tablas la otra para los procedimientos almacenados.
+---
 
-## Requisitos
+## 🔧 Key Features
 
-- JDK 8 o superior.
-- IDE como NetBeans, Eclipse, IntelliJ IDEA, etc.
-- Descargar un .jar para conectar java con SQL como por ejemplo [.jar](https://learn.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15)
-- Tener un gestor de bases de datos como SQL Server.
-- Libreria jCalendar aqui dejo el link [jCalendar](https://toedter.com/jcalendar)
+- ✅ User authentication via login form.
+- 📋 Main menu with access to modules like:
+  - Purchase Management
+  - Sales Management
+  - And more...
 
-## Estructura del Proyecto 
+- 🗂️ Modular architecture:
+  - Presentation Layer (`capaPresentacion`)
+  - Data Layer (`capaData`)
+  - Business Logic Layer (`capaLogica`)
 
-El proyecto está organizado en varias capas para separar la lógica de presentación, datos y negocio:
+---
 
-- **capaPresentacion**: Contiene las clases relacionadas con la interfaz de usuario.
-- **capaData**: Contiene las clases que modelan los datos de usuarios y proveedores.
-- **capaLogica**: Contiene las clases que gestionan la lógica del negocio.
+## 📦 Requirements
 
-## Componentes del Sistema
+Before you begin, make sure you have the following installed:
 
-### 1. frmLogin
- 
-Este formulario permite al usuario ingresar al sistema mediante autenticación con usuario y contraseña.
+- **JDK 8 or higher**
+- **IDE**: NetBeans, Eclipse, IntelliJ IDEA, or any Java IDE
+- **SQL Server** (or compatible DBMS)
+- JDBC Driver for SQL Server ([Download latest .jar](https://learn.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15))
+- **jCalendar Library** – [Get it here](https://toedter.com/jcalendar)
 
-### 2. frmMenu
+---
 
-Este es el menú principal del sistema, desde donde se pueden acceder a las diferentes funcionalidades:
+## 📁 Project Structure 
 
-- **Gestión de Compras**
-- **Gestión de Ventas**
-- **etc**
-### Clonar el Repositorio
+The project follows a layered architecture:
 
-Para obtener una copia del proyecto en tu máquina local, ejecuta el siguiente comando en tu terminal o CMD:
+- `capaPresentacion`: Contains GUI classes and forms.
+- `capaData`: Manages data models and database connections.
+- `capaLogica`: Implements business logic and rules.
+
+Main components include:
+- `FrmLogin`: Authentication screen for system access.
+- `FrmMenu`: Main dashboard to navigate between modules.
+
+---
+
+## 💾 Database Setup
+
+> ⚠️ **Important!**  
+Inside the `DB` folder, you will find **two `.txt` files**:
+- One file contains the **SQL statements to create tables**.
+- The other file contains the **stored procedures** required by the system.
+
+Make sure to run both scripts in your **SQL Server** to set up the necessary database structure and logic before running the application.
+
+---
+
+## 🚀 How to Run the Project
+
+### Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/MiguelAntonioRS/Gestion-Proyect-of-Buys-and-Sales.git
 
 cd Gestion-Proyect-of-Buys-and-Sales
+```
 
+### Step 2: Setup Database
+
+Follow the instructions above to execute the SQL scripts found in the DB folder.
+
+### Step 3: Configure JDBC Connection
+
+Add the SQL Server JDBC driver (.jar)  to your project's build path.
+
+### Step 4: Compile and Run
+
+Navigate to the presentation layer and compile the login class:
+```bash
 cd src/com/presentation
-
+javac FrmLogIn.java
+java FrmLogIn
 javac FrmLogIn
+```
+
+© 2024 Miguel Antonio Rojas Sucarino
