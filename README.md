@@ -5,7 +5,7 @@ This is a **Java-based desktop application** with a graphical user interface (GU
 ---
 
 ## 🔧 Key Features
- 
+
 - ✅ User authentication via login form.
 - 📋 Main menu with access to modules like:
   - Purchase Management
